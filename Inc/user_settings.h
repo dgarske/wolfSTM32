@@ -19,11 +19,11 @@ extern "C" {
 #undef  WOLFSSL_SMALL_STACK
 #define WOLFSSL_SMALL_STACK
 
-#undef  WOLFSSL_STM32F7
-#define WOLFSSL_STM32F7
+#undef  WOLFSSL_STM32F4
+#define WOLFSSL_STM32F4
 
 #undef  WOLFSSL_STM32_CUBEMX
-#define WOLFSSL_STM32_CUBEMX
+//#define WOLFSSL_STM32_CUBEMX
 
 /* Optionally Disable Hardware Hashing Support */
 //#define NO_STM32_HASH

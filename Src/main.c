@@ -31,7 +31,7 @@
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f7xx_hal.h"
+#include "stm32f4xx.h"
 #include "cmsis_os.h"
 #include "lwip.h"
 #include "wolfssl_example.h"
