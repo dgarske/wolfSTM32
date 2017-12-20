@@ -19,24 +19,26 @@ extern "C" {
 #undef  WOLFSSL_SMALL_STACK
 #define WOLFSSL_SMALL_STACK
 
-#undef  WOLFSSL_STM32F7
-#define WOLFSSL_STM32F7
+#undef  WOLFSSL_STM32F4
+#define WOLFSSL_STM32F4
 
 #undef  WOLFSSL_STM32_CUBEMX
 #define WOLFSSL_STM32_CUBEMX
 
 /* Optionally Disable Hardware Hashing Support */
-//#define NO_STM32_HASH
+#define NO_STM32_HASH
 //#define NO_STM32_RNG
 //#define NO_STM32_CRYPTO
 
 #undef  FREERTOS
-//#define FREERTOS
+#define FREERTOS
 
 #undef  WOLFSSL_LWIP
-//#define WOLFSSL_LWIP
+#define WOLFSSL_LWIP
 
 #define HAVE_LWIP_NATIVE
+
+#define WOLFSSL_TPM20
 
 
 /* ------------------------------------------------------------------------- */
@@ -49,11 +51,8 @@ extern "C" {
     #undef  TFM_TIMING_RESISTANT
     #define TFM_TIMING_RESISTANT
 
-    #undef  TFM_NO_ASM
-    //#define TFM_NO_ASM
-
     /* Optimizations (TFM_ARM, TFM_ASM or none) */
-    //#define TFM_ASM
+    //#define TFM_ARM
 #endif
 
 
@@ -107,7 +106,7 @@ extern "C" {
         /* Enable TFM optimizations for ECC */
         //#define TFM_ECC192
         //#define TFM_ECC224
-        //#define TFM_ECC256
+        #define TFM_ECC256
         //#define TFM_ECC384
         //#define TFM_ECC521
     #endif
@@ -140,18 +139,18 @@ extern "C" {
     #undef  HAVE_AESGCM
     #define HAVE_AESGCM
 
-    #ifdef HAVE_AESGCM
-        /* GCM with hardware acceleration requires AES counter/direct for unaligned sizes */
-        #undef  WOLFSSL_AES_COUNTER
-        #define WOLFSSL_AES_COUNTER
+	/* GCM Method: GCM_SMALL, GCM_WORD32 or GCM_TABLE */
+    #undef  GCM_TABLE
+    #define GCM_TABLE
 
-        #undef  WOLFSSL_AES_DIRECT
-        #define WOLFSSL_AES_DIRECT
-    #endif
+	#undef  WOLFSSL_AES_COUNTER
+	#define WOLFSSL_AES_COUNTER
 
-    /* GCM Method: GCM_SMALL, GCM_WORD32 or GCM_TABLE */
-    #undef  GCM_SMALL
-    #define GCM_SMALL
+	#undef  WOLFSSL_AES_DIRECT
+	#define WOLFSSL_AES_DIRECT
+
+	#undef  HAVE_AES_ECB
+	#define HAVE_AES_ECB
 #else
     #define NO_AES
 #endif
@@ -159,7 +158,7 @@ extern "C" {
 /* ChaCha20 / Poly1305 */
 #undef HAVE_CHACHA
 #undef HAVE_POLY1305
-#if 0
+#if 1
     #define HAVE_CHACHA
     #define HAVE_POLY1305
 
@@ -171,7 +170,7 @@ extern "C" {
 /* Ed25519 / Curve25519 */
 #undef HAVE_CURVE25519
 #undef HAVE_ED25519
-#if 0
+#if 1
     #define HAVE_CURVE25519
     #define HAVE_ED25519
 
@@ -288,6 +287,10 @@ extern "C" {
 
 /* Choose RNG method */
 #if 1
+	#ifndef STM32_RNG
+		#define WOLFSSL_GENSEED_FORTEST
+	#endif
+
     /* Use built-in P-RNG (SHA256 based) with HW RNG */
     /* P-RNG + HW RNG (P-RNG is ~8K) */
     #undef  HAVE_HASHDRBG
@@ -363,10 +366,10 @@ extern "C" {
 #define NO_DSA
 
 #undef  NO_DH
-#define NO_DH
+//#define NO_DH
 
 #undef  NO_DES3
-#define NO_DES3
+//#define NO_DES3
 
 #undef  NO_RC4
 #define NO_RC4

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    stm32f7xx_it.h
+  * @file    stm32f4xx_it.h
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   *
@@ -32,8 +32,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F7xx_IT_H
-#define __STM32F7xx_IT_H
+#ifndef __STM32F4xx_IT_H
+#define __STM32F4xx_IT_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -58,6 +58,6 @@ void TIM1_UP_TIM10_IRQHandler(void);
 }
 #endif
 
-#endif /* __STM32F7xx_IT_H */
+#endif /* __STM32F4xx_IT_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
