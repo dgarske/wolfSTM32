@@ -111,7 +111,9 @@ static TPM_RC TPM2_IoCb(TPM2_CTX* ctx, const byte* txBuf, byte* rxBuf, word16 xf
 	SPI_HandleTypeDef* hspi = (SPI_HandleTypeDef*)userCtx;
 	HAL_StatusTypeDef status;
 
+	__HAL_SPI_ENABLE(hspi);
 	status = HAL_SPI_TransmitReceive(hspi, (byte*)txBuf, rxBuf, xferSz, 5000);
+	__HAL_SPI_DISABLE(hspi);
 	if (status == HAL_OK)
 		return TPM_RC_SUCCESS;
 
