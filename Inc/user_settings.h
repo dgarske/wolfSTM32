@@ -38,7 +38,7 @@ extern "C" {
 
 #define HAVE_LWIP_NATIVE
 
-#define WOLFSSL_TPM20
+#define WOLFSSL_TPM2
 
 
 /* ------------------------------------------------------------------------- */

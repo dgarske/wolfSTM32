@@ -9,8 +9,8 @@ extern UART_HandleTypeDef huart4;
 extern SPI_HandleTypeDef hspi1;
 
 
-#ifdef WOLFSSL_TPM20
-static int TPM20_Test(void);
+#ifdef WOLFSSL_TPM2
+extern int TPM2_Demo(void);
 #endif
 
 
@@ -66,8 +66,8 @@ void wolfCryptDemo(void const * argument)
 
         case 'm':
 			printf("\nTPM 2.0 Test\n");
-#ifdef WOLFSSL_TPM20
-			args.return_code = TPM20_Test();
+#ifdef WOLFSSL_TPM2
+			args.return_code = TPM2_Demo();
 #endif
 			printf("TPM 2.0 Test: Return code %d\n", args.return_code);
 			break;
@@ -99,39 +99,3 @@ double current_time()
 		   ((double)subsec/1000);
 }
 
-
-/*****************************************************************************
- * TPM 2.0
- ****************************************************************************/
-#ifdef WOLFSSL_TPM20
-static TPM2_CTX gTpm2Ctx;
-
-static TPM_RC TPM2_IoCb(TPM2_CTX* ctx, const byte* txBuf, byte* rxBuf, word16 xferSz, void* userCtx)
-{
-	SPI_HandleTypeDef* hspi = (SPI_HandleTypeDef*)userCtx;
-	HAL_StatusTypeDef status;
-
-	__HAL_SPI_ENABLE(hspi);
-	status = HAL_SPI_TransmitReceive(hspi, (byte*)txBuf, rxBuf, xferSz, 5000);
-	__HAL_SPI_DISABLE(hspi);
-	if (status == HAL_OK)
-		return TPM_RC_SUCCESS;
-
-	return TPM_RC_FAILURE;
-}
-
-static int TPM20_Test(void)
-{
-	TPM_RC rc;
-
-	rc = TPM2_Init(&gTpm2Ctx, TPM2_IoCb, &hspi1);
-	rc = TPM2_Startup(&gTpm2Ctx);
-
-	rc = TPM2_SelfTest(&gTpm2Ctx);
-
-	rc = TPM2_Shutdown(&gTpm2Ctx);
-
-	return rc;
-}
-
-#endif

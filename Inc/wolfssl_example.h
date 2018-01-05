@@ -23,7 +23,7 @@
 #include <wolfssl/ssl.h>
 #include <wolfcrypt/test/test.h>
 #include <wolfcrypt/benchmark/benchmark.h>
-#include <wolfssl/wolfcrypt/tpm.h>
+#include <wolfssl/wolfcrypt/tpm2.h>
 
 
 void wolfCryptDemo(void const * argument);
