@@ -43,6 +43,7 @@
 /* External variables --------------------------------------------------------*/
 
 extern TIM_HandleTypeDef htim1;
+extern SPI_HandleTypeDef hspi1;
 
 /******************************************************************************/
 /*            Cortex-M4 Processor Interruption and Exception Handlers         */
@@ -230,6 +231,16 @@ void TIM1_UP_TIM10_IRQHandler(void) {
 	/* USER CODE BEGIN TIM1_UP_TIM10_IRQn 1 */
 
 	/* USER CODE END TIM1_UP_TIM10_IRQn 1 */
+}
+
+/**
+  * @brief  This function handles SPI interrupt request.
+  * @param  None
+  * @retval None
+  */
+void SPI1_IRQHandler(void)
+{
+  HAL_SPI_IRQHandler(&hspi1);
 }
 
 
