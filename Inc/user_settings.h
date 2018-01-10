@@ -249,10 +249,10 @@ extern "C" {
 /* ------------------------------------------------------------------------- */
 /* Debugging */
 /* ------------------------------------------------------------------------- */
-#undef  WOLFSSL_DEBUG
-//#define WOLFSSL_DEBUG
+#undef  DEBUG_WOLFSSL
+#define DEBUG_WOLFSSL
 
-#ifdef WOLFSSL_DEBUG
+#ifdef DEBUG_WOLFSSL
     /* Use this to measure / print heap usage */
     #if 0
         #undef  USE_WOLFSSL_MEMORY
