@@ -4,9 +4,9 @@ This example includes:
 
 * wolfCrypt test
 * wolfCrypt benchmark
-* wolfMQTT client
+* TPM 2.0 demo
 
-These examples use the CubeMX Hal for STM32. If you'd like to use the older Standard Peripheral library undefine WOLFSSL_STM32_CUBEMX in user_settings.h. To enable STM32F2 support define WOLFSSL_STM32F2.
+These examples use the CubeMX Hal for STM32. If you'd like to use the older Standard Peripheral library undefine `WOLFSSL_STM32_CUBEMX` in `user_settings.h`. To enable STM32F2 support define `WOLFSSL_STM32F2`. To enable STM32F7 support define `WOLFSSL_STM32F7`.
 
 ## Important Files
 
